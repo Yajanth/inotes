@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 
-class User(BaseModel):
+class Note(BaseModel):
     title: str
     Desc : str
-    Important : bool
+    Important : bool | None= None
