@@ -19,12 +19,22 @@ def index(request:Request):
     for doc in docs:
         newdocs.append({
             "id":doc["_id"],
-            "title":doc["title"]
+            "title":doc["title"],
+            "desc":doc["desc"],
+            "important":["important"]
         })
 
     return templates.TemplateResponse("index.html",{"request":request, "newdocs":newdocs})
 
 
-@note.post('/',response_class=HTMLResponse)
+@note.post('/')
 async def create_item(request : Request):
-    pass
+    form=await request.form()
+    formDict=dict(form)
+    formDict['important']=True if formDict.get("important")=="on" else False
+    note=conn.Notes.notes.insert_one(formDict)
+    return {"Success": True}
+
+
+
+
