@@ -19,12 +19,12 @@ def index(request:Request):
     for doc in docs:
         newdocs.append({
             "id":doc["_id"],
-            "notes":doc["note"]
+            "title":doc["title"]
         })
 
     return templates.TemplateResponse("index.html",{"request":request, "newdocs":newdocs})
 
-@note.post('/')
-def add_item(note : Note):
-    inserted_note=conn.Notes.note.insertOne(dict(note))
-    return noteEntity(inserted_note)
+
+@note.post('/',response_class=HTMLResponse)
+async def create_item(request : Request):
+    pass

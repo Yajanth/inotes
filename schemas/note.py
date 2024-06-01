@@ -1,6 +1,7 @@
 def noteEntity(item)->dict:
     return { 
         "id":str(item["_id"]),
+        "title":str(item["title"]),
         "Desc": item["Desc"],
         "Important":item["Important"]} #converting mongodb object to pythonic dictionary
 
